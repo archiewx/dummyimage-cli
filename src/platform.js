@@ -1,7 +1,6 @@
 const path = require('path');
 const os = require('os');
 const fse = require('fs-extra');
-const { execSync } = require('child_process');
 
 const DUMMY = 'dummy';
 
@@ -21,13 +20,5 @@ exports.saveAsset = (buf, options) => {
   }
   const filePath = path.resolve(basePath, name);
   fse.writeFileSync(filePath, imgBuf);
-  copyAsset(filePath);
   return filePath;
 };
-
-function copyAsset(filePath) {
-  console.log(os.platform());
-  if (os.platform() === 'darwin') {
-    execSync(`pbcopy ${filePath}`);
-  }
-}
