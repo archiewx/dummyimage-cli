@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "Command line image generation for dummyimage.com",
   "main": "bin/cli",
+  "bin": "dummy",
   "repository": "git@github.com:zsirfs/dummyimage-cli.git",
   "author": "zsirfs <zhenglfsir@gmail.com>",
   "license": "Apache",
