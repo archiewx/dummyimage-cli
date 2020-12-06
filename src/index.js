@@ -61,7 +61,7 @@ async function invoke() {
     const buf = await downloadDummyImage(dummyOptions);
     clearInterval(ctx.id);
     spinner.stopAndPersist({ symbol: '✔️', text: '下载成功' });
-    const filePath = saveAsset(buf);
+    const filePath = saveAsset(buf, dummyOptions);
     spinner.succeed(`保存成功, 文件路径: ${filePath}, 用时: ${ctx.n}s`);
   } catch (error) {
     spinner.fail(`获取图片失败, 错误信息: ${error.message}`);
