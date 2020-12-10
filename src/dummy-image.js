@@ -37,3 +37,16 @@ exports.removeHexColorPrefix = function (color) {
   if (typeof color === 'string' && color.startsWith('#')) return color.substring(1);
   return color;
 };
+
+/**
+ *
+ * @param {string} size
+ * @param {number} ratio
+ */
+exports.imageRatio = function (size, ratio) {
+  if (size) {
+    const match = size.match(/(\d{1,})x(\d{1,})/);
+    return `${match[1] * ratio}x${match[2] * ratio}`;
+  }
+  return size;
+};

@@ -1,6 +1,6 @@
 const { program } = require('commander');
 const pkg = require('../package.json');
-const { defaultOptions, removeHexColorPrefix, downloadDummyImage } = require('./dummy-image');
+const { defaultOptions, removeHexColorPrefix, downloadDummyImage, imageRatio } = require('./dummy-image');
 const ora = require('ora');
 const { saveAsset } = require('./platform');
 
@@ -12,6 +12,7 @@ program
   .version(pkg.version)
   .option('-d, --debug', '工具调试', false)
   .option('-s, --size <size>', '设置图片的尺寸', defaultOptions.size)
+  .option('-r, --ratio <ratio>', '设置图片的倍数', defaultOptions.size)
   .option(
     '-c, --color <color>',
     '设置文字颜色',
@@ -26,14 +27,19 @@ program
     (value, prev) => removeHexColorPrefix(value, prev),
     defaultOptions.bgColor,
   )
-  .option('-t, --text <text>', '设置文字内容, 默认值: 未设置和尺寸一致', defaultOptions.size)
+  .option('-t, --text <text>', '设置文字内容, 默认值: 未设置和尺寸一致')
   .parse(process.argv);
 
-if (program.text) dummyOptions.text = program.text;
 if (program.size) {
-  dummyOptions.size = program.size;
-  dummyOptions.text = program.size;
+  if (program.ratio) {
+    dummyOptions.size = imageRatio(program.size, program.ratio);
+    dummyOptions.text = `${program.size}x${program.ratio}`;
+  } else {
+    dummyOptions.size = program.size;
+    dummyOptions.text = program.size;
+  }
 }
+if (program.text) dummyOptions.text = program.text;
 if (program.color) dummyOptions.color = program.color;
 if (program.bgcolor) dummyOptions.bgColor = program.bgcolor;
 
