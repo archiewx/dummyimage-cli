@@ -12,7 +12,7 @@ program
   .version(pkg.version)
   .option('-d, --debug', '工具调试', false)
   .option('-s, --size <size>', '设置图片的尺寸', defaultOptions.size)
-  .option('-r, --ratio <ratio>', '设置图片的倍数', defaultOptions.size)
+  .option('-r, --ratio <ratio>', '设置图片的倍数')
   .option(
     '-c, --color <color>',
     '设置文字颜色',
